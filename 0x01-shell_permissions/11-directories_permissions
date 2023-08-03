@@ -1,2 +1,2 @@
 #!/bin/bash
-ls-ld >> chmod -R +x 
+find . -type d -exec chmod -R +x
