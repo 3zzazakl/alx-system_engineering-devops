@@ -1,2 +1,2 @@
 #!/bin/bash
-find ./ -mindepth 1 -type f | head -n 10
+ls -lat | find -type f | head -n 10
