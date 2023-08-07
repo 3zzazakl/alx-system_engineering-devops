@@ -1,2 +1,3 @@
 #!/bin/bash
-ls -lat | head -n 10
+ls -lt | grep -type f |head -n 10
+
