@@ -1,2 +1,2 @@
 #!/bin/bash
-find ./ -mindepth 1 -type d | head -n 10
+find ./ -mindepth 1 -type f | head -n 10
