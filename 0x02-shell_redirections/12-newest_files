@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -lat | find -type f | head -n 10
+ls -lat | head -n 10
