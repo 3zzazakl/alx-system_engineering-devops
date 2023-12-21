@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# This script is displaying "Best School" 10 times and "Hi" if count is 9
+iterator=0
+
+until [ $iterator -eq 10 ]
+do
+    if [ $iterator -eq 8 ]
+    then
+        echo "Best School"
+        echo "Hi"
+    else
+        echo "Best School"
+    fi
+
+    ((iterator++))
+done
