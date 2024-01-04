@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#displays all active IPv4 IPs on the machine it’s executed on.
+
+ip_addr=$(ifconfig | grep -o 'inet addr:[[:digit:]].*' | cut -d':' -f2)
+echo "$ip_addr"
