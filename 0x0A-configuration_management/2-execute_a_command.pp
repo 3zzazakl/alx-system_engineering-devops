@@ -2,6 +2,6 @@
 # and ensures that it is not running.
 exec { 'kill_process':
   command     => '/usr/bin/pkill killmenow',
-  refreshonly => true,
-  logoutput   => true,
+  refreshonly => 'true',
+  logoutput   => 'true',
 }
