@@ -1,10 +1,11 @@
 file { 'pass':
     ensure  => persent,
     path    => '/etc/ssh/sshd_config',
-    content => 'PasswordAuthentication no',
-  ;
-  'Key':
+    line    => 'PasswordAuthentication no',
+}
+
+file { 'Key':
     ensure  => present,
     path    => '/etc/ssh/sshd_config',
-    content => 'IdentityFile ~/.ssh/school',
+    line    => 'IdentityFile ~/.ssh/school',
 }
