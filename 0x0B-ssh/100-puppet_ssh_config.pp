@@ -2,13 +2,12 @@
 include stdlib
 
 file_line { '/etc/ssh/sshd_config':
-  ensure  => present,
-  path    => '/etc/ssh/sshd_config',
-  content => 'PasswordAuthentication no',
+  ensure => present,
+  path   => '/etc/ssh/sshd_config',
+  line   => 'PasswordAuthentication no',
 }
-
-file_line { '~/.ssh/scool':
-  ensure  => present,
-  path    => '~/etc/ssh/sshd_config',
-  content => 'IdentityFile ~/.ssh/school',
+file_line { '~/.ssh/school':
+  ensure => present,
+  path   => '/etc/ssh/sshd_config',
+  line   => 'IdentityFile ~/.ssh/school',
 }
