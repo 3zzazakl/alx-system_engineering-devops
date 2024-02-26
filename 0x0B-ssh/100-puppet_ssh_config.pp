@@ -1,5 +1,4 @@
 # using puppet to configure the system
-include stdlib
 
 file_line {
   '/etc/ssh/sshd_config':
