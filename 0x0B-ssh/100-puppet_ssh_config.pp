@@ -1,13 +1,14 @@
 # using puppet to configure the system
+include stdlib
 
-file { '/etc/ssh/sshd_config':
+file_line { '/etc/ssh/sshd_config':
   ensure  => present,
   path    => '/etc/ssh/sshd_config',
   content => 'PasswordAuthentication no',
 }
 
-file { '~/.ssh/scool':
+file_line { '~/.ssh/scool':
   ensure  => present,
-  path    => '~/.ssh/school',
-  content => 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDZt'
+  path    => '~/etc/ssh/sshd_config',
+  content => 'IdentityFile ~/.ssh/school',
 }
