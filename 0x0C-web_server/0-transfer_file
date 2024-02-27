@@ -2,9 +2,9 @@
 # Write a Bash script that transfers a file from our client to a server:
 # ./0-transfer_file some_page.html 8.8.8.8 sylvain /vagrant/private_key
 
-if ["$#" -ne 4]; then
+if [ "$#" -ne 4 ]; then
     echo "Usage: 0-transfer_file <file> <host> <user> <path>"
     exit 1
 fi
 
-scp -i $4 $1 $3@$2:~/
+scp -i "$4" "$1" "$3"@"$2":~/
