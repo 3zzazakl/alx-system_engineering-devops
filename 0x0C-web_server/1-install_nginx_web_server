@@ -4,11 +4,6 @@
 #As an answer file, write a Bash script that configures a new Ubuntu machine to respect above requirements (this script will be run on the server itself)
 #You can’t use systemctl for restarting nginx
 
-if [ "$#" -ne 0 ]; then
-    echo "Usage: 0-install_nginx_web_server"
-    exit 1
-fi
-
 sudo apt-get update -y
 sudo apt-get install -y nginx
 sudo sed -i 's/80 default_server/80 default_server default/g' /etc/nginx/sites-available/default
