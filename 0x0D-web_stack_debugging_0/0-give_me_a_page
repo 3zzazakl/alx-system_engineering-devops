@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# debugging accessing web page in a docker container
+
+sudo service apache2 enable
+sudo service apache2 restart
+sudo ufw allow 8080/tcp
+sudo ufw allow 80/tcp
+sudo ufw enable
