@@ -15,9 +15,15 @@ echo "server {
         internal;
     }
 
+    location / {
+        return 404 'Ceci n'est pas une page';
+    }
+
     root /var/www/html;
     index index.html index.htm;
-}" | sudo tee /etc/nginx/sites-available/default
+}" | sudo tee /etc/nginx/sites-available/custom_404 > /dev/null
+
+sudo ln -s /etc/nginx/sites-available/custom_404 /etc/nginx/sites-enabled/custom_404
 
 sudo service nginx restart
 
