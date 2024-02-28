@@ -5,7 +5,7 @@ package { 'nginx':
 }
 
 file { '/var/www/html/index.html':
-  ensure  => 'file',
+  require => package['nginx'],
   content => 'Hello, World!',
 }
 
