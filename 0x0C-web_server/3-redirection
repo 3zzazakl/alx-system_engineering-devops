@@ -15,7 +15,7 @@ echo "server {
 
     root /var/www/html;
     index index.html index.htm;
-}" | sudo tee /etc/nginx/sites-available/default
+}" > /etc/nginx/sites-available/default
 
 sudo nginx -t
 
