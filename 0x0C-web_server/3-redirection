@@ -5,7 +5,7 @@
 sudo apt-get update -y
 sudo apt-get install -y nginx
 
-sudo echo "server {
+echo "server {
     listen 80 default_server;
     listen [::]:80 default_server;
 
@@ -15,6 +15,6 @@ sudo echo "server {
 
     root /var/www/html;
     index index.html index.htm;
-}" > /etc/nginx/sites-available/default
+}" | sudo pee /etc/nginx/sites-available/default
 
 sudo service nginx restart
