@@ -17,10 +17,7 @@ echo "server {
 
     root /var/www/html;
     index index.html index.htm;
-}" | sudo tee /etc/nginx/sites-available/custom_404 > /dev/null
-
-sudo ln -s /etc/nginx/sites-available/custom_404 /etc/nginx/sites-enabled/
-
+}" | sudo tee /etc/nginx/sites-available/default
 
 sudo service nginx restart
 
