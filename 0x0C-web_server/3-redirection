@@ -10,7 +10,7 @@ echo "server {
     listen [::]:80 default_server;
 
     location /redirect_me {
-        return 301 http://www.google.com;
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
     }
 
     root /var/www/html;
