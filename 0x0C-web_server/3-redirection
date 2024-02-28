@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Configure your Nginx server so that /redirect_me is redirecting to another page.
+
+
+sudo apt-get update
+sudo apt-get install -y nginx
+
+echo "server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    location /redirect_me {
+        return 301 http://www.google.com;
+    }
+
+    root /var/www/html;
+    index index.html index.htm;
+}" | sudo tee /etc/nginx/sites-available/default
+
+sudo nginx -t
+
+service nginx restart
