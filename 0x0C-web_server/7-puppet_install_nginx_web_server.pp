@@ -1,26 +1,24 @@
-# setting ngix using puppet
-
-exec { 'apt-update':
-  command => '/usr/bin/apt-get update'
-}
+# install nginx using puppet
 
 package { 'nginx':
+  ensure  => 'installed',
+}
+
+file { '/var/www/html/index.html':
+  ensure  => 'file',
+  content => 'Hello, World!',
+}
+
+file_line {'parse':
   ensure  => present,
-  require => Exec['apt-update']
+  line    => 'rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
+  path    => '/etc/nginx/sites-available/default',
+  require => package['nginx'],
+  after   => 'root /var/www/html;'
+  notify  => Service['nginx'],
 }
 
 service { 'nginx':
   ensure  => running,
-  require => Package['nginx']
-}
-
-file { '/var/www/html/index.html':
-  ensure  => file,
-  content => 'Hello, World!',
-  require => Package['nginx']
-}
-
-exec { 'redirect_me':
-  command  => 'sed -i "24i\rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default',
-  provider => 'shell',
+  require => File_line['parse'],
 }
