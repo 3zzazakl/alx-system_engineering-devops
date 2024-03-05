@@ -6,15 +6,16 @@ sudo apt-get install -y haproxy
 
 echo "ENABLED=1" | sudo tee /etc/default/haproxy
 
-echo "
-    backend servers
-        balance roundrobin
-        server 501510-web-01 100.26.174.255:80 check
-        server 501510-web-02 34.229.67.19:80 check
-    frontend http_front
-        bind *:80
-        mode http
-        default_backend servers" | sudo tee /etc/haproxy/haproxy.cfg
+sudo tee /etc/haproxy/haproxy.cfg <<EOF
+backend servers
+    balance roundrobin
+    server 501510-web-01 100.26.174.255:80 check
+    server 501510-web-02 34.229.67.19:80 check
+frontend http_front
+    bind *:80
+    mode http
+    default_backend servers
+EOF
 
 sudo haproxy -f /etc/haproxy/haproxy.cfg -c
 
