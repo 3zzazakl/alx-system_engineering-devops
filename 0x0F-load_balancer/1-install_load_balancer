@@ -10,7 +10,7 @@ echo "backend servers
     balance roundrobin
     server 501510-web-01 100.26.174.255:80 check
     server 501510-web-02 34.229.67.19:80 check
-    frontend http-in
+    frontend http
             bind *:80
             mode http
             default_backend servers" | sudo tee /etc/haproxy/haproxy.cfg
