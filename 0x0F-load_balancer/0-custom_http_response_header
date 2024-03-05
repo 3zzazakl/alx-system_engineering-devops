@@ -4,7 +4,7 @@
 #As an answer file, write a Bash script that configures
 #You can’t use systemctl for restarting nginx
 
-HEADER="add_header X-Served-By $(hostname) always;"
+HEADER="add_header X-Served-By \$HOSTNAME always;"
 sudo apt-get update -y
 sudo apt-get install -y nginx
 
@@ -14,4 +14,5 @@ echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/404.html
 sudo sed -i "/server {/ a $HEADER" /etc/nginx/sites-available/default
 
 sudo ufw allow 'Nginx HTTP'
+sudo nginx -t
 sudo service nginx start
