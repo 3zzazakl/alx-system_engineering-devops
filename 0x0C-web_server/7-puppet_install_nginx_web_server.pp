@@ -6,7 +6,7 @@ package { 'nginx':
 
 exec { 'root':
   provider => shell,
-  command  => 'sudo echo Hello World! > /var/www/html/index.html',
+  command  => 'echo Hello World! | sudo tee /var/www/html/index.html',
 }
 
 exec { 'redirect':
@@ -18,5 +18,5 @@ exec { 'redirect':
 
 exec { 'restart':
   provider => shell,
-  command  => 'sudo service restart nginx',
+  command  => 'sudo service nginx restart',
 }
