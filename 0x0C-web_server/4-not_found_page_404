@@ -8,11 +8,40 @@ ufw allow 'Nginx HTTP'
 chmod -R 755 /var/www
 echo 'Hello World' | sudo tee /var/www/html/index.html
 
+new_confg=\
+"server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    server_name _;
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+    error_page 404 /404.html;
+
+    location = /404.html {
+        internal;
+    }
+
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+
+    if (\$request_filename ~ redirect_me) {
+        rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
+    }
+}"
+
 
 echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/404.html
 
-sudo sed -i '/^server {/a error_page 404 /404.html;' /etc/nginx/sites-available/default
+echo "$new_confg" | sudo tee /etc/nginx/sites-available/default
 
-sudo service nginx restart
+if [ "$(pgrep nginx)" -le 0 ];
+then
+    sudo service nginx start
+else
+    service nginx restart
+fi;
 
 sudo nginx -t
