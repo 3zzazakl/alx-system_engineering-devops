@@ -20,7 +20,7 @@ new_confg=\
     }
     error_page 404 /404.html;
 
-    location = /404.html {
+    location /404.html {
         internal;
     }
 
@@ -33,7 +33,7 @@ new_confg=\
 }"
 
 
-echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/404.html
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
 
 echo "$new_confg" | sudo tee /etc/nginx/sites-available/default
 
