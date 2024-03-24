@@ -4,15 +4,50 @@
 #As an answer file, write a Bash script that configures
 #You can’t use systemctl for restarting nginx
 
-HEADER="add_header X-Served-By \$HOSTNAME always;"
+HOSTNAME=$(hostname)
+
 sudo apt-get update -y
 sudo apt-get install -y nginx
-
+ufw allow 'Nginx HTTP'
+chmod -R 755 /var/www/html
 echo "Hello World!" | sudo tee /var/www/html/index.html
-echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/404.html
 
-sudo sed -i "/server {/ a $HEADER" /etc/nginx/sites-available/default
+new_confg=\
+"server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
 
-sudo ufw allow 'Nginx HTTP'
+    server_name _;
+
+    add_header X-Served-By $HOSTNAME;
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+    error_page 404 /404.html;
+
+    location /404.html {
+        internal;
+    }
+
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+
+    if (\$request_filename ~ redirect_me) {
+        rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
+    }
+}"
+
+
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+
+echo "$new_confg" | sudo tee /etc/nginx/sites-available/default
+
+if ! service nginx status > /dev/null;
+then
+    sudo service nginx start
+else
+    service nginx restart
+fi;
+
 sudo nginx -t
-sudo service nginx start
