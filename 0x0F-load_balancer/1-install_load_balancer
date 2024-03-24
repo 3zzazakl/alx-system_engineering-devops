@@ -21,6 +21,7 @@ defaults
     option httplog
     retries 3
     option redispatch
+    option dontlognull
     timeout connect 5000
     timeout client 10000
     timeout server 10000
@@ -39,6 +40,8 @@ backend my_servers
     server 501510-web-01 100.26.174.255:80 check
     server 501510-web-02 34.229.67.19:80 check
 EOF
+
+sudo echo "ENABLED=1" > /etc/default/haproxy
 
 sudo haproxy -f /etc/haproxy/haproxy.cfg -c
 
