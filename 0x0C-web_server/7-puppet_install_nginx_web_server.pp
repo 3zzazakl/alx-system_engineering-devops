@@ -1,24 +1,22 @@
 # install nginx using puppet
 
 package { 'nginx':
-  ensure  => 'installed',
+  ensure  => 'present',
 }
 
-file { '/var/www/html/index.html':
-  require => package['nginx'],
-  content => 'Hello, World!',
+exec { 'root':
+  provider => shell,
+  command  => 'sudo echo Hello World! > /var/www/html/index.html',
 }
 
-file_line {'parse':
-  ensure  => present,
-  line    => 'rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
-  path    => '/etc/nginx/sites-available/default',
-  require => package['nginx'],
-  after   => 'root /var/www/html;'
-  notify  => Service['nginx'],
+exec { 'redirect':
+  provider => shell,
+  command  => 'sudo echo "server { listen 80; server_name localhost; \
+  location / { root /var/www/html; index index.html; } }" \
+  > /etc/nginx/sites-available/default',
 }
 
-service { 'nginx':
-  ensure  => running,
-  require => File_line['parse'],
+exec { 'restart':
+  provider => shell,
+  command  => 'sudo systemctl restart nginx',
 }
