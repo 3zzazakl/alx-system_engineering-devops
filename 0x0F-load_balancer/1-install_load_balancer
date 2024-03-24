@@ -4,17 +4,40 @@
 sudo apt-get update -y
 sudo apt-get install -y haproxy
 
-echo "ENABLED=1" | sudo tee /etc/default/haproxy
+sudo systemctl enable haproxy
 
-sudo tee /etc/haproxy/haproxy.cfg <<EOF
-backend servers
-    balance roundrobin
-    server 501510-web-01 100.26.174.255:80 check
-    server 501510-web-02 34.229.67.19:80 check
+mv /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.orig
+
+cat > /etc/haproxy/haproxy.cfg <<EOF
+global
+    log     127.0.0.1 local0 notice
+    user haproxy
+    group haproxy
+    maxconn 2000
+
+defaults
+    log global
+    mode http
+    option httplog
+    retries 3
+    option redispatch
+    timeout connect 5000
+    timeout client 10000
+    timeout server 10000
+
 frontend http_front
     bind *:80
     mode http
-    default_backend servers
+    stats enable
+    stats uri /haproxy?stats
+    default_backend http_back
+
+backend my_servers
+    balance roundrobin
+    option httpclose
+    option forwardfor
+    server 501510-web-01 100.26.174.255:80 check
+    server 501510-web-02 34.229.67.19:80 check
 EOF
 
 sudo haproxy -f /etc/haproxy/haproxy.cfg -c
