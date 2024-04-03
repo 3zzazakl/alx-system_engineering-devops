@@ -1,19 +1,16 @@
 exec { 'update':
-  command  => 'sudo apt update',
+  command  => 'sudo apt update -y',
   provider => shell,
 }
-
-package { 'nginx':
+-> package { 'nginx':
   ensure   => present,
 }
-
-file_line { 'header':
+-> file_line { 'header':
   ensure => present,
   path   => '/etc/nginx/site-available/default',
-  line   => 'add_header X-Served-By $HOSTNAME;',
+  line   => "add_header X-Served-By \"${hostname}\";",
 }
-
-exec { 'restarting':
+-> exec { 'restarting':
   command  => 'sudo service nginx restart',
   provider => shell,
 }
