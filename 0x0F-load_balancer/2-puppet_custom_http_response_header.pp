@@ -1,3 +1,4 @@
+# checking puppet configuration
 exec { 'update':
   command  => 'sudo apt update -y',
   provider => shell,
