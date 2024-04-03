@@ -8,6 +8,7 @@ exec { 'update':
 -> file_line { 'header':
   ensure => present,
   path   => '/etc/nginx/site-available/default',
+  after  => 'server_name _;'
   line   => "add_header X-Served-By \"${hostname}\";",
 }
 -> exec { 'restarting':
