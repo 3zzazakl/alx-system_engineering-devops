@@ -4,7 +4,7 @@ exec { 'update':
 }
 
 package { 'nginx':
-  ensure   => installed,
+  ensure   => present,
 }
 
 file_line { 'header':
