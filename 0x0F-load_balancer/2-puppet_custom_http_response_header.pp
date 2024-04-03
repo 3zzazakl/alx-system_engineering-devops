@@ -10,7 +10,7 @@ package { 'nginx':
 file_line { 'header':
   ensure => present,
   path   => '/etc/nginx/site-available/default',
-  line   => '  add-header X-Servered-By @hostname;',
+  line   => 'add-header X-Served-By @hostname;',
   match  => '^\s*location / {',
 }
 
