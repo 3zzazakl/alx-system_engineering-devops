@@ -4,10 +4,10 @@
 display_info() {
     subdomain=$1
     domain=$2
-    record_type=$(dig +short "$subdomain.$domain" | awk '{print $4}')
+    #record_type=$(dig +short "$subdomain.$domain" | grep 'A'| awk '{print $1}')
     destination=$(dig +short "$subdomain.$domain")
     # The subdomain [SUB_DOMAIN] is a [RECORD_TYPE] record and points to [DESTINATION]
-    echo "The subdomain $subdomain is a $record_type record and points to $destination"
+    echo "The subdomain $subdomain is a A record and points to $destination"
 }
 
 main() {
@@ -20,7 +20,7 @@ main() {
             display_info "$sub" "$domain"
         done
     else
-        display_info "$domain" "$subdomain"
+        display_info "$subdomain" "$domain"
     fi
 }
 
