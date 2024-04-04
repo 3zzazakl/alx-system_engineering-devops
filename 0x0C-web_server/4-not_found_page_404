@@ -14,24 +14,22 @@ new_confg=\
     listen [::]:80 default_server;
 
     server_name _;
-
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+   
     location / {
         try_files \$uri \$uri/ =404;
     }
     error_page 404 /404.html;
 
-    location /404.html {
+    location = /404.html {
         internal;
     }
-
-    root /var/www/html;
-    index index.html index.htm index.nginx-debian.html;
 
     if (\$request_filename ~ redirect_me) {
         rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
     }
 }"
-
 
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
 
