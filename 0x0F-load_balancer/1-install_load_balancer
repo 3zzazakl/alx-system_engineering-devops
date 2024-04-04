@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 # Install and configure HAproxy on your lb-01 server.
+# Don't use systemctl ever in any ALX Server
 
 sudo apt-get update -y
 sudo apt-get install -y haproxy
 
-sudo systemctl enable haproxy
+sudo service haproxy start
 
 mv /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.orig
 
@@ -37,8 +38,8 @@ backend my_servers
     balance roundrobin
     option httpclose
     option forwardfor
-    server 501510-web-01 100.26.174.255:80 check
-    server 501510-web-02 34.229.67.19:80 check
+    server 501510-web-01 107.23.102.134:80 check
+    server 501510-web-02 18.210.17.11:80 check
 EOF
 
 sudo echo "ENABLED=1" > /etc/default/haproxy
