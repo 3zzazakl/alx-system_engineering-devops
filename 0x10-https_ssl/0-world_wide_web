@@ -20,7 +20,7 @@ main() {
             display_info "$sub" "$domain"
         done
     else
-        display_info "$subdomain" "$domain"
+        display_info "$domain" "$subdomain"
     fi
 }
 
