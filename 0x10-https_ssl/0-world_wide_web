@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# adding secure connection to web server
+
+display_info() {
+    subdomain=$1
+    domain=$2
+    record_type=$(dig +short "$subdomain.$domain" | awk '{print $4}')
+    destination=$(dig +short "$subdomain.$domain")
+    # The subdomain [SUB_DOMAIN] is a [RECORD_TYPE] record and points to [DESTINATION]
+    echo "The subdomain $subdomain is a $record_type record and points to $destination"
+}
+
+main() {
+    domain=$1
+    subdomain=$2
+
+    if [ -z "$subdomain" ]; then
+        subdomains=("www" "lb-01" "web-01" "web-02")
+        for sub in "${subdomains[@]}"; do
+            display_info "$sub" "$domain"
+        done
+    else
+        display_info "$subdomain" "$domain"
+    fi
+}
+
+if [ $# -lt 1 ] || [ $# -gt 2 ]; then
+    echo "Usage: $0 <domain> [subdomain]"
+    exit 1
+fi
+
+main "$@"
