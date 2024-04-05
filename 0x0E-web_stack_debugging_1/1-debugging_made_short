@@ -2,4 +2,4 @@
 # modify web stack debuging0 previous task to change nginx default port to 80
 cp -r /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 sudo service nginx restart
-sudo pkill -9 nginx
+pkill -9 nginx
