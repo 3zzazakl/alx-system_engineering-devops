@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-sudo service stop nginx
-sudo service start nginx
-sudo sed -i 's/listen\s*80;/listen 80 default_server;/g' /etc/nginx/sites-available/default
+# checking nginx debugging techniques to solve error in it.
+# modify web stack debuging0 previous task to change nginx default port to 80
+cp -r /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 sudo service nginx restart
+sudo pkill -9 nginx
