@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# checking nginx debugging techniques to solve error in it.
+
+#checking nginx is installed or not.
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt install nginx -y
+
+# checking nginx is listening on port 80 or not.
+if ! netstat -tuln | grep 80; then
+  sed -i 's/listen\s*80;/listen 80 default_server;/g' /etc/nginx/sites-available/default
+  sudo service nginx restart
+fi
