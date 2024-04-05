@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# make above code short
-sudo apt update -y & apt upgrade -y & apt install nginx -y & apt install net-tools -y
-sudo service stop nginx & sudo service start nginx & sudo service enable nginx
+sudo service stop nginx
+sudo service start nginx
 sudo sed -i 's/listen\s*80;/listen 80 default_server;/g' /etc/nginx/sites-available/default
 sudo service nginx restart

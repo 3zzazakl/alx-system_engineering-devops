@@ -9,7 +9,7 @@ sudo apt install net-tools -y
 sudo service stop nginx & sudo service start nginx & sudo service enable nginx
 
 # checking nginx is listening on port 80 or not.
-if ! netstat -tuln | grep ':80'; then
+if ! netstat -tuln | grep ':80 '; then
   sed -i 's/listen\s*80;/listen 80 default_server;/g' /etc/nginx/sites-available/default
   sudo service nginx restart
 fi
