@@ -5,6 +5,7 @@
 sudo apt update -y
 sudo apt upgrade -y
 sudo apt install nginx -y
+sudo apt install net-tools -y
 
 # checking nginx is listening on port 80 or not.
 if ! netstat -tuln | grep ':80'; then
