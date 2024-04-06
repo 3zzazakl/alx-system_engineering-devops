@@ -27,7 +27,7 @@ defaults
 frontend azzazdevops-front
     bind *:80
     bind *:443 ssl crt /etc/haproxy/certs/www.azzazdevops.tech.pem
-    redirect scheme https 301 if !{ ssl_fc }
+    redirect scheme https code 301 if !{ ssl_fc }
     mode http
     stats enable
     stats uri /haproxy?stats
