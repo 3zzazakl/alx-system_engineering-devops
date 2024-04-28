@@ -2,6 +2,6 @@
 # run_nginx_as_nginx
 pkill -f apache2
 chmod 644 /etc/nginx/nginx.conf
-sed -i "li user nginx;" /etc/nginx/nginx.conf
+sed -i "s/^user .*/user nginx;/g" /etc/nginx/nginx.conf
 sed -i "s/listen 80;/listen 8080;/g" /etc/nginx/sites-enabled/default
 sudo -u nginx service nginx restart
