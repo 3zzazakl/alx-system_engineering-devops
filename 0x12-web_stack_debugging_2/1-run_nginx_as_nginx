@@ -1,27 +1,7 @@
 #!/usr/bin/env bash
 # run_nginx_as_nginx
-
-if ! command -v nginx > /dev/null 2>&1; 
-then
-    echo "nginx is not installed"
-    apt-get update
-    apt-get install -y nginx
-fi
-
-nginx_config="/etc/nginx/nginx.conf"
-
-if grep -q "^user nginx;" "$nginx_config"; then
-    echo "User is already set to nginx"
-else
-    sed -i 's/^user .*/user nginx;/g' "$nginx_config"
-fi
-
-if ! grep -q "listen 8080" "$nginx_config"; 
-then
-    sed -i 's/^listen 80;/listen 8080;/g' "$nginx_config"
-fi
-
-service nginx restart
-
-pgrep -f '[n]ginx'
-
+pkill -f apache2
+chmod 644 /etc/nginx/nginx.conf
+sed -i 's/^user .*/user nginx;/g' /etc/nginx/nginx.conf
+sed -i 's/^listen 80;/listen 8080;/g' /etc/nginx/nginx.conf
+sudo -u nginx service nginx restart
