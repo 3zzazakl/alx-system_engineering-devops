@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# edit /etc/ufw/before.rules
+sudo tee /etc/ufw/before.rules <<EOF
+*nat
+:PREROUTING ACCEPT [0:0]
+-A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
+COMMIT
+EOF
+
+# reload ufw
+sudo ufw reload
