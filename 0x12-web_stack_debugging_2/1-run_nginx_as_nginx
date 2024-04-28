@@ -21,7 +21,7 @@ then
     sed -i 's/^listen 80;/listen 8080;/g' "$nginx_config"
 fi
 
-systemctl restart nginx
+service nginx restart
 
 pgrep -f '[n]ginx'
 
