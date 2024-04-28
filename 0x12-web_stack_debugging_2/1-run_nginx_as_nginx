@@ -23,4 +23,5 @@ fi
 
 systemctl restart nginx
 
-ps aux | grep '[n]ginx'
+pgrep -f '[n]ginx'
+
