@@ -4,4 +4,4 @@ pkill -f apache2
 chmod 644 /etc/nginx/nginx.conf
 sed -i 's/^user .*/user nginx;/g' /etc/nginx/nginx.conf
 sed -i 's/^listen 80;/listen 8080;/g' /etc/nginx/nginx.conf
-sudo -u nginx service nginx restart
+service nginx restart
