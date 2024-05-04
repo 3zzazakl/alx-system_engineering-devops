@@ -20,6 +20,6 @@ if __name__ == "__main__":
 
     dtsk = [task for task in todo if task.get("completed")]
 
-    print(f"Employee {ud.get('name')} is done with tasks({len(dtsk)}{len(todo)}):")
+    print(f"Employee {ud.get('name')} is done with tasks({len(dtsk)}/{len(todo)}):")
     for task in dtsk:
         print(f"\t {task.get('title')}")
