@@ -15,8 +15,10 @@ def cvs_writer(employeeId):
             employeeId)).json()
 
     with open("{}.csv".format(employeeId), "w") as csvfile:
-        fieldnames = ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"]
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
+        fieldnames = ["USER_ID", "USERNAME",
+                      "TASK_COMPLETED_STATUS", "TASK_TITLE"]
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames,
+                                quoting=csv.QUOTE_ALL)
 
         for task in tasks:
             writer.writerow({
