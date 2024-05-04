@@ -4,24 +4,24 @@ import requests
 import sys
 
 
-employee_id = sys.argv[1]
-response_user = requests.get(
-    f"https://jsonplaceholder.typicode.com/users/{employee_id}")
-reponse_todos = requests.get(
-    f"https://jsonplaceholder.typicode.com/todos?userId={employee_id}")
+def do(userId):
+    """Gather data from an API"""
+    name = requests.get(
+        "https://jsonplaceholder.typicode.com/users/{}".format(
+            userId)).json().get("name")
+    tasks = requests.get(
+        "https://jsonplaceholder.typicode.com/todos?userId={}".format(
+            userId)).json()
+
+    tasks_done = ['\t ' + task.get('title') for task in tasks
+                  if task.get('completed')]
+
+    if name and tasks_done:
+        print("Employee {} is done with tasks({}/{}):".format(
+            name, len(tasks_done), len(tasks)))
+        print("\n".join(tasks_done))
 
 
 if __name__ == "__main__":
-    """ Gather data from an API"""
-
-    ud = response_user.json()
-    todo = reponse_todos.json()
-
-    ltd = len(todo)
-
-    dtsk = [task for task in todo if task.get("completed")]
-    ltsk = len(dtsk)
-
-    print(f"Employee {ud.get('name')} is done with tasks({ltsk}/{ltd}):")
-    for task in dtsk:
-        print(f"\t{task.get('title')}")
+    if len(sys.argv) == 2 and sys.argv[1].isdigit():
+        do(sys.argv[1])
