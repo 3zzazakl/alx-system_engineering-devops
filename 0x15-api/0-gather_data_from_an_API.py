@@ -18,8 +18,11 @@ if __name__ == "__main__":
     ud = response_user.json()
     todo = reponse_todos.json()
 
-    dtsk = [task for task in todo if task.get("completed")]
+    ltd = len(todo)
 
-    print(f"Employee {ud.get('name')} is done with tasks({len(dtsk)}/{len(todo)}):")
+    dtsk = [task for task in todo if task.get("completed")]
+    ltsk = len(dtsk)
+
+    print(f"Employee {ud.get('name')} is done with tasks({ltsk}/{ltd}):")
     for task in dtsk:
         print(f"\t {task.get('title')}")
