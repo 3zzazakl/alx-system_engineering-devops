@@ -13,9 +13,6 @@ reponse_todos = requests.get(
 
 if __name__ == "__main__":
     """ Gather data from an API"""
-    if response_user.status_code != 200 or reponse_todos.status_code != 200:
-        print("Error: Not a valid user id")
-        sys.exit(1)
 
     ud = response_user.json()
     todo = reponse_todos.json()
