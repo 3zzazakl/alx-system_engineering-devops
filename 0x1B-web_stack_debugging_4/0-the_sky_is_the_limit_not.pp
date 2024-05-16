@@ -7,7 +7,6 @@ exec { 'replace':
 }
 
 exec { 'restart-nginx':
-  provider    => shell,
-  command     => 'sudo service nginx restart',
-  refreshonly => true,
+  provider => shell,
+  command  => 'sudo service nginx restart',
 }
