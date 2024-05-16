@@ -8,5 +8,3 @@ do
     kill -HUP "$pid"
     sleep 1
 done
-
-echo "Reloading master"
