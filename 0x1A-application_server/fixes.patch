@@ -1,0 +1,12 @@
+--- a/4-reload_gunicorn_no_downtime.sh
++++ b/4-reload_gunicorn_no_downtime.sh
+@@ -5,7 +5,7 @@
+ 
+ for pid in $worker_pids do
+     echo "Relaoding worker $pid"
+-    kill -HUP $pid
++    kill -HUP "$pid"
+     sleep 1
+ done
+ 
+
