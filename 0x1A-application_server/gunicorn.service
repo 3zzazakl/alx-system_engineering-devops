@@ -1,5 +1,5 @@
 [Unit]
-Description=Gunicorn instance to serve web application
+Description=Gunicorn instance to serve web application check
 After=network.target
 
 [Service]
@@ -10,6 +10,6 @@ ExecStart=/home/ubuntu/.local/bin/gunicorn --workers 3 --bind 0.0.0.0:5003 web_d
 Restart=always
 StandardOutput=file:/tmp/airbnb-access.log
 StandardError=file:/tmp/airbnb-error.log
-
+ 
 [Install]
 WantedBy=multi-user.target
